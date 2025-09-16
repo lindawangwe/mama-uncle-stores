@@ -1,0 +1,20 @@
+
+export const categories = [
+    {href:"/sugar", name:"Sugar", imageUrl:"sugar/sugar.jpeg" },
+    {href:"/milk", name:"Milk", imageUrl:"milk/milk.jpeg" },
+    {href:"/tea leaves", name:"Tea Leaves", imageUrl:"tea leaves/tea.jpeg" },
+    {href:"/coffee", name:"Coffee", imageUrl:"coffee/coffee.jpeg" },
+    {href:"/bread", name:"Bread", imageUrl:"bread/bread.jpeg"},
+    {href:"/rice", name:"Rice", imageUrl:"rice/rice.jpeg"},
+    {href:"/cooking oil", name:"Cooking Oil", imageUrl:"cooking oil/oil.jpeg"},
+    {href:"/salt", name:"Salt", imageUrl:"salt/salt.jpeg"},
+    {href:"/maize flour", name:"Maize Flour", imageUrl:"maize flour/maize.jpeg"},
+    {href:"/wheat flour", name:"Wheat Flour", imageUrl:"wheat flour/wheat.jpeg"},
+    {href:"/food additives", name:"Food Additives", imageUrl:"food additives/foodadditives.jpeg"},
+    {href:"/matchbox", name:"Matchbox", imageUrl:"matchbox/matchbox.jpeg"},
+    {href:"/detergents", name:"Detergents", imageUrl:"detergents/detergents.jpeg"},
+    {href:"/bar soap", name:"Bar Soap", imageUrl:"bar soap/barsoap.jpeg"},
+    {href:"/toothpaste", name:"Toothpaste", imageUrl:"toothpaste/toothpaste.jpeg"},
+    {href:"/sanitary pads", name:"Sanitary Pads", imageUrl:"sanitary pads/sanitary.jpeg"},
+    {href:"/tissue", name:"Tissue", imageUrl:"tissue/tissue.jpeg"},
+  ];
