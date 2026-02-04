@@ -1,7 +1,7 @@
 import './App.css';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { SidebarProvider } from './contexts/SideBarContexts';
 import AppLayout from './layouts/AppLayout';
@@ -22,9 +22,11 @@ import ProductDetailsPage from './pages/ProductDetailsPage';
 
 import LoadingSpinner from './components/LoadingSpinner';
 import SearchResultsPage from './pages/SearchResultsPage';
+import IntroVideo from './components/IntroVideo';
 function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
   const { getCartItems} = useCartStore();
+  const [showIntro, setShowIntro] = useState<boolean>(true); 
 
   useEffect(() => {
     checkAuth();
@@ -96,6 +98,9 @@ function App() {
 
   return (
     <SidebarProvider>
+
+      {/* Add IntroVideo here */}
+      {showIntro && <IntroVideo onComplete={() => setShowIntro(false)} />}
       <div className="w-full min-h-screen bg-teal-900">
         <RouterProvider router={router} />
         <Toaster />
