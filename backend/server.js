@@ -13,7 +13,7 @@ import analyticsRoutes from "./routes/analytics.routes.js";
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 'mongodb://localhost:27017/ecommerce';
 
 app.use(express.json()); 
 app.use(cookieParser());
