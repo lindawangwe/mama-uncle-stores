@@ -104,3 +104,32 @@ export const checkoutSuccess = async (req, res) => {
 	}
 };
 
+export const getRecentProducts = async (req, res) => {
+  try {
+    // Get the last 5 orders across all users, newest fi
+    const recentOrders = await Order.find()
+      .sort({ createdAt: -1 })
+      .limit(5)
+      .populate("products.product");
+
+    // Extract unique products from those orders
+    const seenIds = new Set();
+    const recentProducts = [];
+
+    for (const order of recentOrders) {
+      for (const item of order.products) {
+        const product = item.product;
+        if (product && !seenIds.has(product._id.toString())) {
+          seenIds.add(product._id.toString());
+          recentProducts.push(product);
+        }
+      }
+    }
+
+    res.status(200).json({ products: recentProducts });
+  } catch (error) {
+    console.error("Error fetching recent products:", error);
+    res.status(500).json({ message: "Error fetching recent products" });
+  }
+};
+

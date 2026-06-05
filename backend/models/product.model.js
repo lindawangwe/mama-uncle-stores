@@ -22,7 +22,23 @@ const productSchema = new mongoose.Schema(
 		category: {
 			type: String,
 			required: true,
-		}
+		},
+		originalPrice: { 
+			type: Number, 
+			default: null 
+		},
+    	discount: { 
+			type: Number, 
+			default: 0 
+		},
+    	isOnSale: { 
+			type: Boolean, 
+			default: false 
+		},
+		isNewArrival: { 
+			type: Boolean,
+			 default: false 
+		},
 	},
 	{ timestamps: true }
 );

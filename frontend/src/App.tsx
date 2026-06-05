@@ -19,10 +19,18 @@ import PurchaseSuccessPage from './pages/PurchaseSuccessPage';
 import PurchaseCancelPage from './pages/PurchaseCancelPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProductDetailsPage from './pages/ProductDetailsPage';
+import DealsPage from './pages/DealsPage';
+import NewArrivalsPage from './pages/NewArrivalsPage';
+import RecentPage from './pages/RecentPage';
+import PaymentsPage from './pages/PaymentsPage';
+import FAQPage from './pages/FaqPage';
+import ContactPage from './pages/ContactPage';
+import DeliveryPage from './pages/DeliveryPage';
 
 import LoadingSpinner from './components/LoadingSpinner';
 import SearchResultsPage from './pages/SearchResultsPage';
 import IntroVideo from './components/IntroVideo';
+
 function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
   const { getCartItems} = useCartStore();
@@ -90,7 +98,36 @@ function App() {
         {
           path: '/search',
           element: <SearchResultsPage />
-        }
+        },
+        {
+          path: '/deals',
+          element: <DealsPage />
+        },
+        {
+          path: '/new-arrivals',
+          element: <NewArrivalsPage />
+        },
+        {
+          path:'/recent',
+          element:<RecentPage />
+        },
+        {
+          path:'/payments',
+          element:<PaymentsPage />
+        },
+        {
+          path:'/FAQ',
+          element:<FAQPage />
+        },
+        {
+          path:'/contacts',
+          element:<ContactPage />
+        },
+        {
+          path:'/delivery',
+          element:<DeliveryPage />
+        },
+
       ],
 
     },

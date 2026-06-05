@@ -2,45 +2,44 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { PlusCircle, Upload, Loader } from "lucide-react";
 import { useProductStore } from "../stores/useProductStore";
+import toast from "react-hot-toast";
 
 const categories = ["bar soap", "toothpaste", "sugar", "milk", "tea leaves", "coffee", "bread", 
     "rice", "cooking oil", "salt", "maize flour", "wheat flour", "food additives", "matchbox",
      "detergents", "sanitary pads", "tissue"];
 
-export default function CreateProductForm (){
+export default function CreateProductForm() {
 	const [newProduct, setNewProduct] = useState({
 		name: "",
 		description: "",
 		price: "",
 		category: "",
 		image: "",
+		isNewArrival: false,
 	});
 
 	const { createProduct, loading } = useProductStore();
 
-	const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
 			await createProduct(newProduct);
-			setNewProduct({ name: "", description: "", price: "", category: "", image: "" });
+			setNewProduct({ name: "", description: "", price: "", category: "", image: "", isNewArrival: false });
+			toast.success("Product created successfully!"); 
 		} catch {
 			console.log("error creating a product");
 		}
 	};
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (!e.target.files || e.target.files.length === 0) return; // Prevents errors if no file is selected
-	
+		if (!e.target.files || e.target.files.length === 0) return;
 		const file = e.target.files[0];
 		const reader = new FileReader();
-	
 		reader.onloadend = () => {
 			setNewProduct({ ...newProduct, image: reader.result as string });
 		};
-	
 		reader.readAsDataURL(file);
 	};
-	
 
 	return (
 		<motion.div
@@ -137,7 +136,21 @@ export default function CreateProductForm (){
 						<Upload className='h-5 w-5 inline-block mr-2' />
 						Upload Image
 					</label>
-					{newProduct.image && <span className='ml-3 text-sm text-amber-300'>Image uploaded </span>}
+					{newProduct.image && <span className='ml-3 text-sm text-amber-300'>Image uploaded</span>}
+				</div>
+
+				{/* ← ADDED: New Arrival checkbox */}
+				<div className='flex items-center gap-3'>
+					<input
+						type='checkbox'
+						id='isNewArrival'
+						checked={newProduct.isNewArrival}
+						onChange={(e) => setNewProduct({ ...newProduct, isNewArrival: e.target.checked })}
+						className='w-4 h-4 accent-amber-500 cursor-pointer'
+					/>
+					<label htmlFor='isNewArrival' className='text-sm font-medium text-amber-300 cursor-pointer'>
+						Mark as New Arrival
+					</label>
 				</div>
 
 				<button
@@ -162,4 +175,4 @@ export default function CreateProductForm (){
 			</form>
 		</motion.div>
 	);
-};
+}

@@ -78,6 +78,15 @@ export const getProductById = async (req, res) => {
 	}
   };
 
+  export const getNewArrivals = async (req, res) => {
+  try {
+    const products = await Product.find({ isNewArrival: true });
+    res.json({ products });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch new arrivals" });
+  }
+};
+
 export const deleteProduct = async (req, res) => {
 	try {
 		const product = await Product.findById(req.params.id);

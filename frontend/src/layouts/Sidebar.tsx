@@ -15,6 +15,7 @@ import { Button, buttonStyles } from "../components/Button";
 import { twMerge } from "tailwind-merge";
 import { useSidebarContext } from "../contexts/SideBarContexts";
 import { NavbarFirst } from "../components/Navbar";
+import { Link } from "react-router-dom";
 
 export function Sidebar() {
   const { isLargeOpen, isSmallOpen, close } = useSidebarContext();
@@ -70,7 +71,7 @@ export function Sidebar() {
             <LargeSidebarItem
               IconOrImgUrl={BellPlus}
               title="new"
-              url="/new arrivals"
+              url="/new-arrivals"
             />
             <LargeSidebarItem IconOrImgUrl={Gem} title="recent" url="/recent" />
           </LargeSidebarSection>
@@ -79,47 +80,47 @@ export function Sidebar() {
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
               title="Kabras"
-              url="/new arrivals"
+              url="/products/6a190fbac1df2a30d8c5936a"
             />
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
               title="Mumias"
-              url="/new arrivals"
+              url="/products/6a190feac1df2a30d8c5936f"
             />
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
               title="Nutrameal"
-              url="/new arrivals"
+              url="/products/6a19101dc1df2a30d8c59374"
             />
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
               title="Fahari"
-              url="/new arrivals"
+              url="/products/6a19116cc1df2a30d8c59383"
             />
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
               title="Baraka"
-              url="/new arrivals"
+              url="/products/6a1910dac1df2a30d8c59379"
             />
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
               title="Jamaa"
-              url="/new arrivals"
+              url="/products/6a1125ffdbfe7576af145149"
             />
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
               title="Menengai"
-              url="/new arrivals"
+              url="/products/6a112561dbfe7576af145143"
             />
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
               title="MtKenya"
-              url="/new arrivals"
+              url="/products/6a190c4bc1df2a30d8c5932e"
             />
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
               title="Molo"
-              url="/new arrivals"
+              url="/products/6a190bf8c1df2a30d8c59329"
             />
           </LargeSidebarSection>
           <hr />
@@ -132,7 +133,7 @@ export function Sidebar() {
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
               title="FAQ"
-              url="/FAQ "
+              url="/FAQ"
             />
             <LargeSidebarItem
               IconOrImgUrl={PocketKnifeIcon}
@@ -159,8 +160,8 @@ type SmallSidebarItemProps = {
 
 function SmallSidebarItem({ Icon, title, url }: SmallSidebarItemProps) {
   return (
-    <a
-      href={url}
+    <Link
+      to={url}
       className={twMerge(
         buttonStyles({ variant: "ghost" }),
         "py-4 px-1 flex flex-col items-center rounded-lg gap-1"
@@ -168,7 +169,7 @@ function SmallSidebarItem({ Icon, title, url }: SmallSidebarItemProps) {
     >
       <Icon className="w-6 h-6" />
       <div className="text-sm">{title}</div>
-    </a>
+    </Link>
   );
 }
 
@@ -223,8 +224,8 @@ function LargeSidebarItem({
   isActive = false,
 }: LargeSidebarItemProps) {
   return (
-    <a
-      href={url}
+    <Link
+      to={url}
       className={twMerge(
         buttonStyles({ variant: "ghost" }),
         `w-full flex items-center rounded-lg gap-4 p-3
@@ -240,6 +241,6 @@ function LargeSidebarItem({
       <div className="whitespace-nowrap overflow-hidden text-ellipsis">
         {title}
       </div>
-    </a>
+    </Link>
   );
 }

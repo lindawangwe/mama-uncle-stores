@@ -5,8 +5,15 @@ import axios from "../lib/axios";
 interface Product {
   _id: string;
   name: string;
+  description: string;
   price: number;
-  isFeatured: boolean;
+  image: string;
+  category: string;
+  originalPrice?: number;
+  discount?: number;
+  isOnSale?: boolean;
+  isNewArrival?: boolean;
+
   
 }
 
@@ -21,8 +28,9 @@ interface ProductStore {
   fetchAllProducts: () => Promise<void>;
   fetchProductsByCategory: (category: string) => Promise<void>;
   deleteProduct: (productId: string) => Promise<void>;
-  toggleFeaturedProduct: (productId: string) => Promise<void>;
   fetchFeaturedProducts: () => Promise<void>;
+  fetchNewArrivals: () => Promise<void>;
+  fetchRecentProducts: () => Promise<void>;
 }
 
 export const useProductStore = create<ProductStore>((set) => ({
@@ -81,22 +89,22 @@ export const useProductStore = create<ProductStore>((set) => ({
     }
   },
   
-  toggleFeaturedProduct: async (productId: string) => {
-    set({ loading: true });
-    try {
-      const response = await axios.patch<{ isFeatured: boolean }>(`/products/${productId}`);
-      // this will update the isFeatured prop of the product
-      set((prevState) => ({
-        products: prevState.products.map((product) =>
-          product._id === productId ? { ...product, isFeatured: response.data.isFeatured } : product
-        ),
-        loading: false,
-      }));
-    } catch (error: any) {
-      set({ loading: false });
-      toast.error(error.response?.data?.error || "Failed to update product");
-    }
-  },
+  // toggleFeaturedProduct: async (productId: string) => {
+  //   set({ loading: true });
+  //   try {
+  //     const response = await axios.patch<{ isFeatured: boolean }>(`/products/${productId}`);
+  //     // this will update the isFeatured prop of the product
+  //     set((prevState) => ({
+  //       products: prevState.products.map((product) =>
+  //         product._id === productId ? { ...product, isFeatured: response.data.isFeatured } : product
+  //       ),
+  //       loading: false,
+  //     }));
+  //   } catch (error: any) {
+  //     set({ loading: false });
+  //     toast.error(error.response?.data?.error || "Failed to update product");
+  //   }
+  // },
   
   fetchFeaturedProducts: async () => {
     set({ loading: true });
@@ -108,4 +116,25 @@ export const useProductStore = create<ProductStore>((set) => ({
       console.log("Error fetching featured products:", error);
     }
   },
+  fetchNewArrivals: async () => {
+  set({ loading: true });
+  try {
+    const response = await axios.get<{ products: Product[] }>("/products/new-arrivals");
+    set({ products: response.data.products, loading: false });
+  } catch (error: any) {
+    set({ error: "Failed to fetch new arrivals", loading: false });
+    toast.error(error.response?.data?.error || "Failed to fetch new arrivals");
+  }
+},
+
+fetchRecentProducts: async () => {
+  set({ loading: true });
+  try {
+    const response = await axios.get<{ products: Product[] }>("/payments/recent");
+    set({ products: response.data.products, loading: false });
+  } catch (error: any) {
+    set({ error: "Failed to fetch recent products", loading: false });
+    toast.error(error.response?.data?.error || "Failed to fetch recent products");
+  }
+},
 }));
