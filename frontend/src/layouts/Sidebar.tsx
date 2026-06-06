@@ -24,20 +24,20 @@ export function Sidebar() {
     <>
       {isSmallOpen && (
         <aside
-          className={`fixed z-30 top-20 left-0 overflow-y-auto bg-teal-700 scrollbar-hidden
+          className={`fixed z-[999] top-20 left-0 overflow-y-auto bg-teal-700 scrollbar-hidden
               pb-4 flex flex-col  w-16  ${
                 isLargeOpen ? "lg:hidden " : "lg:flex"
               }`}
         >
           <SmallSidebarItem Icon={Home} title="Home" url="/" />
-          <SmallSidebarItem Icon={HandCoins} title="Offers" url="/offers" />
-          <SmallSidebarItem Icon={Split} title="Brands" url="/brands" />
+          <SmallSidebarItem Icon={HandCoins} title="Offers" url="/deals" />
+          <SmallSidebarItem Icon={Split} title="what's new" url="/new-arrivals" />
         </aside>
       )}
       {isSmallOpen && (
         <div
           onClick={close}
-          className="lg:hidden fixed inset-0 z-[999] bg-secondary-dark opacity-60"
+          className="lg:hidden fixed inset-0 z-[998] bg-black opacity-60"
         ></div>
       )}
 
@@ -47,7 +47,7 @@ export function Sidebar() {
                                 overflow-y-auto scrollbar-hidden pb-4 flex-col gap-2 ${
                                   isLargeOpen ? "lg:flex" : "hidden"
                                 } ${
-            isSmallOpen ? "flex z-[999] bg-amber-300 max-h-screen" : "hidden"
+            isSmallOpen ? "flex z-[1000] bg-teal-700 max-h-screen" : "hidden"
           } `}
         >
           <div className="lg:hidden pt-2 pb-4 px-2 sticky top-0">
@@ -159,9 +159,13 @@ type SmallSidebarItemProps = {
 };
 
 function SmallSidebarItem({ Icon, title, url }: SmallSidebarItemProps) {
+
+  const { close } = useSidebarContext();
+
   return (
     <Link
       to={url}
+      onClick={close}
       className={twMerge(
         buttonStyles({ variant: "ghost" }),
         "py-4 px-1 flex flex-col items-center rounded-lg gap-1"
@@ -223,9 +227,13 @@ function LargeSidebarItem({
   url,
   isActive = false,
 }: LargeSidebarItemProps) {
+
+  const { close } = useSidebarContext();
+
   return (
     <Link
       to={url}
+      onClick={close}
       className={twMerge(
         buttonStyles({ variant: "ghost" }),
         `w-full flex items-center rounded-lg gap-4 p-3
