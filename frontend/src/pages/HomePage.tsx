@@ -1,5 +1,5 @@
 import CategoryItem from "../components/CategoryItem";
-import { categories } from "../data/Categories";
+import { categories } from "../data/categories";
 
 
 export default function HomePage (){
